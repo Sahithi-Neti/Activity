@@ -6,8 +6,8 @@ int main()
 {
   int a,b,c;
   printf("Enter Number: \n");
-  printf("Enter Number: \n");
   scanf("%d",&a);
+  printf("Enter Number: \n");
   scanf("%d",&b);
   add(a,b);
   printf("Sum of %d and %d is %d",a,b,c);
