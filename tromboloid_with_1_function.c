@@ -7,13 +7,14 @@ int main()
 {
   float h,b,d,v;
   printf("Enter height: \n");
-  printf("Enter breadth: \n");
-  printf("Enter distance: \n");
   scanf("%f",&h);
+  printf("Enter breadth: \n");
   scanf("%f",&b);
+  printf("Enter distance: \n");
   scanf("%f",&d);
   v = tromboloid_volume(h,b,d);
   printf("The volume of tromboloid is %f",v);
+  return 0;
 }
 
 float tromboloid_volume(float h, float b, float d)
