@@ -29,7 +29,7 @@ int main()
   h = input();
   printf("Breadth(b)\n");
   b = input();
-  printf("Distance(d)\n");
+  printf("Depth(d)\n");
   d = input();
   v=tromboloid_volume(h,b,d);
   display(v);
