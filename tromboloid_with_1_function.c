@@ -8,7 +8,7 @@ int main()
   scanf("%f",&h);
   printf("Enter breadth: \n");
   scanf("%f",&b);
-  printf("Enter distance: \n");
+  printf("Enter depth: \n");
   scanf("%f",&d);
   v = 0.33 *((h*d*b)+(d/b));
   printf("The volume of tromboloid is %f",v);
