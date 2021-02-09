@@ -4,7 +4,7 @@
 
 struct points
 {
-    double X,Y;
+    double a;
 }p;
 
 double distance(double x1,double y1,double x2,double y2)
@@ -15,31 +15,34 @@ double distance(double x1,double y1,double x2,double y2)
     return dist;
 }
 
-double getx()
+double getpoint()
 {
-    printf("Enter 'x' Co-ordinate:\t");
-    scanf("%lf",&p.X);
-    return p.X;
+    printf("Value:\t");
+    scanf("%lf",&p.a);
+    return p.a;
 }
 
-double gety()
+double display(double x1, double y1, double x2, double y2, double d)
 {
-    printf("Enter 'y' Co-ordinate:\t");
-    scanf("%lf",&p.Y);
-    return p.Y;
+    printf("The Distance between (%lf,%lf) and (%lf,%lf) is %lf\n",x1,y1,x2,y2,d);
+    return 0.00;
 }
 
 int main()
 {
     double x1,y1,x2,y2,d;
     printf("Enter Co-ordinates of First point\n");
-    x1=getx();
-    y1=gety();
+    printf(" 'x' Co-ordinate:\n");
+    x1=getpoint();
+    printf(" 'y' Co-ordinate:\n");
+    y1=getpoint();
     printf("Enter Co-ordinates of Second point\n");
-    x2=getx();
-    y2=gety();
+    printf(" 'x' Co-ordinate:\n");
+    x2=getpoint();
+    printf(" 'y' Co-ordinate:\n");
+    y2=getpoint();
     d=distance(x1,y1,x2,y2);
-    printf("The Distance between (%lf,%lf) and (%lf,%lf) is %lf\n",x1,y1,x2,y2,d);
+    display(x1,y1,x2,y2,d);
 
     return 0;
 }
