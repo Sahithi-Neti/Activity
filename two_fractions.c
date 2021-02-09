@@ -23,6 +23,7 @@ float compute(int n1, int d1, int n2, int d2)
 float display(int n1, int d1, int n2, int d2, float sum)
 {
     printf("SUM:\n %d/%d + %d/%d = %f\n",n1,d1,n2,d2,sum);
+    return 0.0;
 }
 
 
