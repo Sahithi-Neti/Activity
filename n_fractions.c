@@ -1,56 +1,79 @@
 //WAP to find the sum of n fractions.
-#include <stdio.h>
+#include<stdio.h>
 
-struct fraction{
-    int a,n;
-    float frac[500];
+struct fractions{
+    int n;
+    int num[500];
+    int den[500];
 }f;
 
-int value()
+int getvalue()
 {
-    printf("Value:\t");
-    scanf("%d",&f.a);
-    return f.a;
+    printf("Enter total number of fractions to be added:");
+    scanf("%d",&f.n);
+    printf("Enter numerators of %d fractions\n",f.n);
+    for(int i=0; i<f.n; i++)
+    {
+        scanf("%d",&f.num[i]);
+    }
+    printf("Enter denominators of %d fractions\n",f.n);
+    for(int j=0; j<f.n; j++)
+    {
+        scanf("%d",&f.den[j]);
+    }
+    return 0;
 }
 
 
-float compute(int n,float frac[])
+int gcd(int N, int D)
 {
-    float sum=0;
-    for(int j=0;j<f.n;j++)
+    if (D==0)
     {
-        sum = sum+f.frac[j];
+        return N;
+    }
+    return gcd(D , N%D);
+}
+
+
+int lcm(int d[], int n)
+{
+    int val;
+    for(int i=1; i<n; i++)
+    {
+        val = (((d[i]*val)) / (gcd(d[i],val)));
     }
     
-    return sum;
+    return val;
 }
 
-float display(int n,float sum)
+
+void compute()
 {
-    printf("The sum of the given %d fractions is:%f\n",f.n,sum);
-    return 0.0;
+    int N = 0;
+    int D = lcm(f.den,f.n);
+    for(int i=0; i<f.n; i++)
+    {
+        N = N+(f.num[i])*(D / f.den[i]);
+    }
+    
+    int Gcd = gcd(N,D);
+    
+    N = N/Gcd;
+    D = D/Gcd;
+    
+    display(N,D);
 }
 
+int display(int n, int d)
+{
+    printf("The sum of given fractions is %d/%d\n",n,d);
+    return 0;
+}
 
 int main()
 {
-    int a,b;
-    float c,sum;
-    printf("Enter total number of Fractions:");
-    scanf("%d",&f.n);
-    printf("Enter %d Fractions\n",f.n);
-    for(int i=0;i<f.n;i++)
-    {
-        printf("\nEnter fraction(%d)\n",i+1);
-        printf("Numerator-");
-        a=value();
-        printf("Denominator-");
-        b=value();
-        c = a/b;
-        f.frac[i]=c;
-    }
-    
-    sum = compute(f.n,f.frac);
-    display(f.n,sum);
+    getvalue();
+    compute();
     return 0;
-}
+}   
+
