@@ -11,11 +11,25 @@ double distance(double x1,double y1,double x2,double y2)
     return dist;
 }
 
-double getpoint()
+double getpoint(double *x1, double *y1, double *x2, double *y2)
 {
-    printf("Value:\t");
-    scanf("%lf",&a);
-    return a;
+    double p,q,r,s,d;
+    printf("Enter Co-ordinates of First point\n");
+    printf(" 'x' Co-ordinate:\n");
+    scanf("%lf",&p);
+    *x1=p;
+    printf(" 'y' Co-ordinate:\n");
+    scanf("%lf",&q);
+    *y1=q;
+    printf("Enter Co-ordinates of Second point\n");
+    printf(" 'x' Co-ordinate:\n");
+    scanf("%lf",&r);
+    *x2=r;
+    printf(" 'y' Co-ordinate:\n");
+    scanf("%lf",&s);
+    *y2=s;
+    d = distance(*x1,*y1,*x2,*y2);
+    return d;
 }
 
 double display(double x1, double y1, double x2, double y2, double d)
@@ -27,18 +41,7 @@ double display(double x1, double y1, double x2, double y2, double d)
 int main()
 {
     double x1,y1,x2,y2,d;
-    printf("Enter Co-ordinates of First point\n");
-    printf(" 'x' Co-ordinate:\n");
-    x1=getpoint();
-    printf(" 'y' Co-ordinate:\n");
-    y1=getpoint();
-    printf("Enter Co-ordinates of Second point\n");
-    printf(" 'x' Co-ordinate:\n");
-    x2=getpoint();
-    printf(" 'y' Co-ordinate:\n");
-    y2=getpoint();
-    d=distance(x1,y1,x2,y2);
+    d = getpoint(&x1,&y1,&x2,&y2);
     display(x1,y1,x2,y2,d);
-
     return 0;
 }
