@@ -3,53 +3,45 @@
 #include<stdio.h>
 
 struct frac{
-    int n1,n2,d1,d2,num,den;
-}f;
+    int n,d;
+}f,p,r;
 
 
 int value()
 {
     printf("First fraction\n");
     printf("Numerator-Value:\t");
-    scanf("%d",&f.n1);
+    scanf("%d",&f.n);
     printf("Denominator-Value:\t ");
-    scanf("%d",&f.d1);
+    scanf("%d",&f.d);
     printf("Second fraction\n");
     printf("Numerator-Value:\t");
-    scanf("%d",&f.n2);
+    scanf("%d",&p.n);
     printf("Denominator-Value\t");
-    scanf("%d",&f.d2);
+    scanf("%d",&p.d);
     return 0;
 }
 
-float compute()
+void compute()
 {
     int d;
     float s1,s2,sum;
-    f.num = (f.n1*f.d2)+(f.n2*f.d1);
-    f.den = f.d1*f.d2;
-    for(int i=1; i<=f.num && i<=f.den; i++)
+    r.n = (f.n*p.d)+(p.n*f.d);
+    r.d = f.d*p.d;
+    for(int i=1; i<=r.n && i<=r.d; i++)
     {
-        if(f.num%i==0 && f.den%i==0)
+        if(r.n%i==0 && r.d%i==0)
         d=i;
     }
-    f.num = f.num/d;
-    f.den = f.den/d;
-    
-    //for exact value
-    
-    s1 = (float) f.n1/f.d1;
-    s2 = (float) f.n2/f.d2;
-    sum = s1+s2;
-    return sum;
+    r.n = r.n/d;
+    r.d = r.d/d;
 
 }
 
 
-int display(float sum)
+void display()
 {
-    printf("SUM:\n %d/%d + %d/%d = %d/%d = %f\n",f.n1,f.d1,f.n2,f.d2,f.num,f.den,sum);
-    return 0;
+    printf("SUM:\n %d/%d + %d/%d = %d/%d\n",f.n,f.d,p.n,p.d,r.n,r.d);
 }
 
 
@@ -57,7 +49,7 @@ int main()
 {
     float sum;
     value();
-    sum = compute();
-    display(sum);
+    compute();
+    display();
     return 0;
 }
