@@ -13,7 +13,7 @@ int tot_frac()
     return t;
 }
 
-int getvalue(int n, struct fractions*num, struct fractions*den)
+void getvalue(int n, struct fractions*num, struct fractions*den)
 {
     
     printf("Enter numerators of %d fractions\n",n);
@@ -66,10 +66,9 @@ void compute(int t, struct fractions num[], struct fractions den[],int l, struct
     f->d = f->d/g;
 }
 
-int display(int n, int d)
+void display(int n, int d)
 {
     printf("The sum of given fractions is %d/%d\n",n,d);
-    return 0;
 }
 
 int main()
