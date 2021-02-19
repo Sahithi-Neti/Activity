@@ -2,66 +2,68 @@
 #include<stdio.h>
 
 struct fractions{
-    int n;
-    int num[500];
-    int den[500];
-}f;
+    int n,d;
+};
 
-int getvalue()
+int tot_frac()
 {
+    int t;
     printf("Enter total number of fractions to be added:");
-    scanf("%d",&f.n);
-    printf("Enter numerators of %d fractions\n",f.n);
-    for(int i=0; i<f.n; i++)
+    scanf("%d",&t);
+    return t;
+}
+
+int getvalue(int n, struct fractions*num, struct fractions*den)
+{
+    
+    printf("Enter numerators of %d fractions\n",n);
+    for(int i=0; i<n; i++)
     {
-        scanf("%d",&f.num[i]);
+        scanf("%d",&num[i].n);
     }
-    printf("Enter denominators of %d fractions\n",f.n);
-    for(int j=0; j<f.n; j++)
+    printf("Enter denominators of %d fractions\n",n);
+    for(int j=0; j<n; j++)
     {
-        scanf("%d",&f.den[j]);
+        scanf("%d",&den[j].d);
     }
-    return 0;
 }
 
 
-int gcd(int N, int D)
+int hcf(int N, int D)
 {
     if (D==0)
     {
         return N;
     }
-    return gcd(D , N%D);
+    return hcf(D , N%D);
 }
 
 
-int lcm(int d[], int n)
+int lcm(struct fractions*d, int n)
 {
     int val;
     for(int i=1; i<n; i++)
     {
-        val = (((d[i]*val)) / (gcd(d[i],val)));
+        val = (((d[i].d*val)) / (hcf(d[i].d,val)));
     }
     
     return val;
 }
 
 
-void compute()
+void compute(int t, struct fractions num[], struct fractions den[],int l, struct fractions*f)
 {
-    int N = 0;
-    int D = lcm(f.den,f.n);
-    for(int i=0; i<f.n; i++)
+    f->n = 0;
+    f->d = l;
+    for(int i=0; i<t; i++)
     {
-        N = N+(f.num[i])*(D / f.den[i]);
+        f->n = f->n+(num[i].n)*(f->d /den[i].d);
     }
     
-    int Gcd = gcd(N,D);
+    int g = hcf(f->n,f->d);
     
-    N = N/Gcd;
-    D = D/Gcd;
-    
-    display(N,D);
+    f->n = f->n/g;
+    f->d = f->d/g;
 }
 
 int display(int n, int d)
@@ -72,8 +74,15 @@ int display(int n, int d)
 
 int main()
 {
-    getvalue();
-    compute();
+    int n,l;
+    n = tot_frac();
+    struct fractions f;
+    struct fractions num[n];
+    struct fractions den[n];
+    getvalue(n,num,den);
+    l=lcm(den,n);
+    compute(n,num,den,l,&f);
+    display(f.n,f.d);
     return 0;
-}   
+}
 
