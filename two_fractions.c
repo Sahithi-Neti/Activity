@@ -22,16 +22,16 @@ int value(struct frac*f, struct frac*p)
     return 0;
 }
 
-int hcf(int a,int b)
+int hcf(int n,int d)
 {
-    int d;
- while((a%b)>0)
+    int h;
+ while((n%d)>0)
     {
-        d = a%b;
-        a = b;
-        b = d;
+        h = n%d;
+        n = d;
+        d = h;
     }
-    return b;   
+    return d;   
 }
 
 void compute(struct frac f, struct frac p, struct frac*r)
