@@ -22,26 +22,34 @@ int value(struct frac*f, struct frac*p)
     return 0;
 }
 
-void compute(struct frac*f, struct frac*p, struct frac*r)
+int hcf(int a,int b)
+{
+    int d;
+ while((a%b)>0)
+    {
+        d = a%b;
+        a = b;
+        b = d;
+    }
+    return b;   
+}
+
+void compute(struct frac f, struct frac p, struct frac*r)
 {
     int d;
     float s1,s2,sum;
-    r->n = (f->n*p->d)+(p->n*f->d);
-    r->d = f->d*p->d;
-    for(int i=1; i<=r->n && i<=r->d; i++)
-    {
-        if(r->n%i==0 && r->d%i==0)
-        d=i;
-    }
+    r->n = (f.n*p.d)+(p.n*f.d);
+    r->d = f.d*p.d;
+    d=hcf(r->n,r->d);
     r->n = r->n/d;
     r->d = r->d/d;
 
 }
 
 
-void display(struct frac*f, struct frac*p, struct frac*r)
+void display(struct frac f, struct frac p, struct frac r)
 {
-    printf("SUM:\n %d/%d + %d/%d = %d/%d\n",f->n,f->d,p->n,p->d,r->n,r->d);
+    printf("SUM:\n %d/%d + %d/%d = %d/%d\n",f.n,f.d,p.n,p.d,r.n,r.d);
 }
 
 
@@ -51,7 +59,7 @@ int main()
     struct frac p;
     struct frac r;
     value(&f,&p);
-    compute(&f,&p,&r);
-    display(&f,&p,&r);
+    compute(f,p,&r);
+    display(f,p,r);
     return 0;
 }
