@@ -7,7 +7,7 @@ struct frac{
 };
 
 
-int value(struct frac*f, struct frac*p)
+void value(struct frac*f, struct frac*p)
 {
     printf("First fraction\n");
     printf("Numerator-Value:\t");
@@ -19,7 +19,6 @@ int value(struct frac*f, struct frac*p)
     scanf("%d",&p->n);
     printf("Denominator-Value\t");
     scanf("%d",&p->d);
-    return 0;
 }
 
 int hcf(int n,int d)
@@ -37,7 +36,6 @@ int hcf(int n,int d)
 void compute(struct frac f, struct frac p, struct frac*r)
 {
     int d;
-    float s1,s2,sum;
     r->n = (f.n*p.d)+(p.n*f.d);
     r->d = f.d*p.d;
     d=hcf(r->n,r->d);
