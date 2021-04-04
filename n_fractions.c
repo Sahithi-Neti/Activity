@@ -5,83 +5,81 @@ struct fractions{
     int n,d;
 };
 
-int tot_frac()
-{
-    int t;
-    printf("Enter total number of fractions to be added:");
-    scanf("%d",&t);
-    return t;
-}
 
-void getvalue(int n, struct fractions*num, struct fractions*den)
+struct fractions input_one()
+{
+    struct fractions i;
+    printf("Enter fraction- Numerator followed by denominator:\n");
+    scanf("%d%d",&i.n,&i.d);
+    return i;
+}
+struct fractions input_n(int n,struct fractions a[n])
 {
     
-    printf("Enter numerators of %d fractions\n",n);
-    for(int i=0; i<n; i++)
+    for(int i=0;i<n;i++)
     {
-        scanf("%d",&num[i].n);
-    }
-    printf("Enter denominators of %d fractions\n",n);
-    for(int j=0; j<n; j++)
-    {
-        scanf("%d",&den[j].d);
+        a[i]=input_one();
     }
 }
-
 
 int hcf(int N, int D)
 {
-    if (D==0)
+     int hcf=1,temp;
+    if ( N<D) 
     {
-        return N;
+      temp=N;
+      N=D;
+      D=temp;
     }
-    return hcf(D , N%D);
+    if ( N%D==0) 
+     return D;
+
+    for (int i = 2;i <= D/2; i++)
+    {
+
+      if (N % i == 0 && D % i == 0)
+	        hcf = i;
+    }
+  return hcf;
 }
 
 
-int lcm(struct fractions*d, int n)
+struct fractions compute_one(struct fractions f1,struct fractions f2)
 {
-    int val;
-    for(int i=1; i<n; i++)
+    struct fractions f;
+    f.n=(f1.n*f2.d)+(f2.n*f1.d);
+    f.d=f1.d*f2.d;
+    return f;
+}
+struct fractions compute_n(int n,struct fractions a[n])
+{
+    struct fractions sum;
+    sum.n=0;
+    sum.d=1;
+    for(int i=0;i<n;i++)
     {
-        val = (((d[i].d*val)) / (hcf(d[i].d,val)));
+        sum=compute_one(a[i],sum);
     }
-    
-    return val;
+    int divisor=hcf(sum.n,sum.d);
+    struct fractions result={sum.n/divisor,sum.d/divisor};
+    return result;
 }
 
-
-void compute(int t, struct fractions num[], struct fractions den[],int l, struct fractions*f)
+struct fractions display(struct fractions result)
 {
-    f->n = 0;
-    f->d = l;
-    for(int i=0; i<t; i++)
-    {
-        f->n = f->n+(num[i].n)*(f->d /den[i].d);
-    }
+    printf("The sum of given fractions is:\t%d/%d",result.n,result.d);
     
-    int g = hcf(f->n,f->d);
-    
-    f->n = f->n/g;
-    f->d = f->d/g;
-}
-
-void display(int n, int d)
-{
-    printf("The sum of given fractions is %d/%d\n",n,d);
 }
 
 int main()
 {
-    int n,l;
-    n = tot_frac();
-    struct fractions f;
-    struct fractions num[n];
-    struct fractions den[n];
-    getvalue(n,num,den);
-    l=lcm(den,n);
-    compute(n,num,den,l,&f);
-    display(f.n,f.d);
-    return 0;
+    int n;
+    printf("Enter number of fractions\n");
+    scanf("%d",&n);
+    struct fractions a[n],sum;
+    input_n(n,a);
+    sum=compute_n(n,a);
+    display(sum);
+    
 }
 
