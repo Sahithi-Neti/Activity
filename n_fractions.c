@@ -6,10 +6,10 @@ struct fractions{
 };
 
 
-struct fractions input_one()
+struct fractions input_one(int n)
 {
     struct fractions i;
-    printf("Enter fraction- Numerator followed by denominator:\n");
+    printf("Enter %d fractions- Numerator followed by denominator:\n",n);
     scanf("%d%d",&i.n,&i.d);
     return i;
 }
@@ -18,26 +18,26 @@ struct fractions input_n(int n,struct fractions a[n])
     
     for(int i=0;i<n;i++)
     {
-        a[i]=input_one();
+        a[i]=input_one(n);
     }
 }
 
-int hcf(int N, int D)
+int hcf(int a, int b)
 {
      int hcf=1,temp;
-    if ( N<D) 
+    if ( a<b) 
     {
-      temp=N;
-      N=D;
-      D=temp;
+      temp=a;
+      a=b;
+      b=temp;
     }
-    if ( N%D==0) 
-     return D;
+    if ( a%b==0) 
+     return b;
 
-    for (int i = 2;i <= D/2; i++)
+    for (int i = 2;i <= b/2; i++)
     {
 
-      if (N % i == 0 && D % i == 0)
+      if (a % i == 0 && b % i == 0)
 	        hcf = i;
     }
   return hcf;
@@ -65,21 +65,33 @@ struct fractions compute_n(int n,struct fractions a[n])
     return result;
 }
 
-struct fractions display(struct fractions result)
+struct fractions display(int t,struct fractions a[t], struct fractions result)
 {
-    printf("The sum of given fractions is:\t%d/%d",result.n,result.d);
-    
+    printf("The sum of\n");
+    for(int i=0; i<t; i++)
+    {
+        printf("%d/%d",a[i].n,a[i].d);
+        if((i+1)==t)
+        {
+            printf("=");
+        }
+        else
+        {
+            printf("+");
+        }
+   }
+   printf("%d/%d\n",result.n,result.d);
 }
+
 
 int main()
 {
     int n;
-    printf("Enter number of fractions\n");
+    printf("Enter number of fractions to be added\n");
     scanf("%d",&n);
     struct fractions a[n],sum;
     input_n(n,a);
     sum=compute_n(n,a);
-    display(sum);
+    display(n,a,sum);
     
 }
-
